@@ -42,7 +42,7 @@ function getCraPaths() {
     if (args.paths.isOverridden) {
         const filePath = path.resolve(args.paths.value);
         log("Found paths config at: ", filePath);
-        return filePath;
+        return require.resolve(filePath);
     }
     return resolveConfigFilePath(reactScriptsFolderPath, "paths.js");
 }
