@@ -9,7 +9,7 @@ const { nodeModulesPath } = require("./paths");
 function getReactScriptsFolderPath() {
     let filepath = "";
 
-    if (args.reactScripts.isOverrided) {
+    if (args.reactScripts.isOverridden) {
         filepath = path.resolve(
             `${nodeModulesPath}/${args.reactScripts.value}/`
         );
@@ -37,10 +37,17 @@ function overrideModule(modulePath, newModule) {
 }
 
 const reactScriptsFolderPath = getReactScriptsFolderPath();
-const craPaths = require(resolveConfigFilePath(
-    reactScriptsFolderPath,
-    "paths.js"
-));
+
+function getCraPaths() {
+    if (args.paths.isOverridden) {
+        const filePath = path.resolve(args.paths.value);
+        log("Found paths config at: ", filePath);
+        return filePath;
+    }
+    return resolveConfigFilePath(reactScriptsFolderPath, "paths.js");
+}
+
+const craPaths = getCraPaths();
 
 /************  Webpack Dev Config  *******************/
 

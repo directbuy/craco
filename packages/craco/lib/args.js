@@ -5,6 +5,7 @@ const args = process.argv;
 const VERBOSE_ARG = "--verbose";
 const REACT_SCRIPTS_ARG = "--react-scripts";
 const CONFIG_ARG = "--config";
+const PATHS_ARG = '--paths';
 
 function findArg(key) {
     const index = args.indexOf(key);
@@ -20,8 +21,8 @@ function isFlagSet(flag) {
 }
 
 function getValue(key) {
-    const result = (isOverrided = false, value, argIndex, valueIndex) => ({
-        isOverrided,
+    const result = (isOverridden = false, value, argIndex, valueIndex) => ({
+        isOverridden,
         value,
         argIndex,
         valueIndex
@@ -43,11 +44,11 @@ function getValue(key) {
 }
 
 function removeConflictingCustomArgs() {
-    if (reactScripts.isOverrided) {
+    if (reactScripts.isOverridden) {
         process.argv.splice(reactScripts.argIndex, 2);
     }
 
-    if (config.isOverrided) {
+    if (config.isOverridden) {
         process.argv.splice(config.argIndex, 2);
     }
 }
@@ -55,10 +56,12 @@ function removeConflictingCustomArgs() {
 const isVerbose = isFlagSet(VERBOSE_ARG);
 const reactScripts = getValue(REACT_SCRIPTS_ARG);
 const config = getValue(CONFIG_ARG);
+const paths = getValue(PATHS_ARG);
 
 module.exports = {
     isVerbose,
     reactScripts,
     config,
+    paths,
     removeConflictingCustomArgs
 };

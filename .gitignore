@@ -9,3 +9,5 @@ packages/debug
 
 npm-debug.log*
 *.tgz
+
+.idea/

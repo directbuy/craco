@@ -20,7 +20,7 @@ function ensureConfigSanity(cracoConfig) {
 function loadCracoConfig(context) {
     let configFilePath = "";
 
-    if (args.config.isOverrided) {
+    if (args.config.isOverridden) {
         configFilePath = require.resolve(`${projectRoot}/${args.config.value}`);
     } else {
         configFilePath = require.resolve(`${projectRoot}/craco.config.js`);

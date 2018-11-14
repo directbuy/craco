@@ -83,7 +83,7 @@ function createConfigProviderProxy(
             rootDir
         };
 
-        if (args.reactScripts.isOverrided) {
+        if (args.reactScripts.isOverridden) {
             jestContext.resolve = relativePath =>
                 path.resolve(
                     nodeModulesPath,
