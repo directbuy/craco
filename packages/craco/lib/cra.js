@@ -42,12 +42,15 @@ function getCraPaths() {
     if (args.paths.isOverridden) {
         const filePath = path.resolve(args.paths.value);
         log("Found paths config at: ", filePath);
-        return require.resolve(filePath);
+        const absolutePath = require.resolve(filePath);
+        const craPaths = require(absolutePath);
+        require.cache[require.resolve('react-scripts/config/paths')] = require.cache(absolutePath);
+        return craPaths;
     }
-    return resolveConfigFilePath(reactScriptsFolderPath, "paths.js");
+    return require(resolveConfigFilePath(reactScriptsFolderPath, "paths.js"));
 }
 
-const craPaths = require(getCraPaths());
+const craPaths = getCraPaths();
 
 /************  Webpack Dev Config  *******************/
 
