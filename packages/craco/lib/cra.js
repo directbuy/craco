@@ -44,7 +44,7 @@ function getCraPaths() {
         log("Found paths config at: ", filePath);
         const absolutePath = require.resolve(filePath);
         const craPaths = require(absolutePath);
-        require.cache[require.resolve('react-scripts/config/paths')] = require.cache(absolutePath);
+        require.cache[require.resolve('react-scripts/config/paths')] = require.cache[absolutePath];
         return craPaths;
     }
     return require(resolveConfigFilePath(reactScriptsFolderPath, "paths.js"));
